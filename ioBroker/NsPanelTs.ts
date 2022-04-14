@@ -348,12 +348,12 @@ function CreateEntity(pageItem: PageItem, placeId: number, useColors: boolean = 
                 var optVal = "0"
                 if (existsState(pageItem.id + ".ON_ACTUAL")) {
                     optVal = getState(pageItem.id + ".ON_ACTUAL").val;
-                    unit = GetUnitOfMeasurement(pageItem.id + ".ON_ACTUAL");
+                    unit = pageItem.unit !== undefined ? pageItem.unit : GetUnitOfMeasurement(pageItem.id + ".ON_ACTUAL");
                     RegisterEntityWatcher(pageItem.id + ".ON_ACTUAL");
                 }
                 else if (existsState(pageItem.id + ".ACTUAL")) {
                     optVal = getState(pageItem.id + ".ACTUAL").val;
-                    unit = GetUnitOfMeasurement(pageItem.id + ".ACTUAL");
+                    unit = pageItem.unit !== undefined ? pageItem.unit : GetUnitOfMeasurement(pageItem.id + ".ACTUAL");
                     RegisterEntityWatcher(pageItem.id + ".ACTUAL");
                 }
 
@@ -830,7 +830,9 @@ type PageItem = {
     interpolateColor: (boolean | undefined),
     minValue: (number | undefined),
     maxValue: (number | undefined),
-    name: (string | undefined)
+    name: (string | undefined),
+    unit: (string | undefined)
+    
 }
 
 type Config = {
